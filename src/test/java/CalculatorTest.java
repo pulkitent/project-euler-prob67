@@ -1,14 +1,14 @@
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class CalculatorTest {
+class CalculatorTest {
     @Test
     @DisplayName("Should calculate maximum sum path for a given triangle")
-    public void expectsMaxSumPathToBeCalculated() {
+    void expectsMaxSumPathToBeCalculated() {
         List<List<Cell>> triangularMatrix = createTriangularMatrix();
 
         Assertions.assertEquals(23, Calculator.calculateMaxSumPath(triangularMatrix));
@@ -16,7 +16,7 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("Should calculate maximum sum path for a triangle with single node only")
-    public void expectsMaxSumToBeCalculatedForBaseCase() {
+    void expectsMaxSumToBeCalculatedForBaseCase() {
         List<List<Cell>> triangularMatrix = new LinkedList<>();
         List<Cell> row = new LinkedList();
         row.add(new Cell(5, 5));
@@ -27,7 +27,7 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("Should calculate maximum sum path for a triangle with single node only")
-    public void expectsExceptionWhenMaxSumPathIsCalculated() {
+    void expectsExceptionWhenMaxSumPathIsCalculated() {
         List<List<Cell>> triangularMatrix = new LinkedList<>();
 
         Assertions.assertThrows(RuntimeException.class, () ->
