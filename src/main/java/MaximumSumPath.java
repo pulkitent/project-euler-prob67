@@ -10,7 +10,8 @@ public class MaximumSumPath {
 
         triangularMatrix.forEach(System.out::println);
 
-        int maxPathSum = Calculator.calculateMaxSumPath(triangularMatrix);
+        Calculator calculator = new Calculator(triangularMatrix);
+        int maxPathSum = calculator.calculateMaxSumPath();
         System.out.println("Maximum path sum " + maxPathSum);
 
         long endTime = System.nanoTime();

@@ -10,8 +10,9 @@ class CalculatorTest {
     @DisplayName("Should calculate maximum sum path for a given triangle")
     void expectsMaxSumPathToBeCalculated() {
         List<List<Cell>> triangularMatrix = createTriangularMatrix();
+        Calculator calculator = new Calculator(triangularMatrix);
 
-        Assertions.assertEquals(23, Calculator.calculateMaxSumPath(triangularMatrix));
+        Assertions.assertEquals(23, calculator.calculateMaxSumPath());
     }
 
     @Test
@@ -21,17 +22,19 @@ class CalculatorTest {
         List<Cell> row = new LinkedList();
         row.add(new Cell(5, 5));
         triangularMatrix.add(row);
+        Calculator calculator = new Calculator(triangularMatrix);
 
-        Assertions.assertEquals(5, Calculator.calculateMaxSumPath(triangularMatrix));
+        Assertions.assertEquals(5, calculator.calculateMaxSumPath());
     }
 
     @Test
     @DisplayName("Should calculate maximum sum path for a triangle with single node only")
     void expectsExceptionWhenMaxSumPathIsCalculated() {
         List<List<Cell>> triangularMatrix = new LinkedList<>();
+        Calculator calculator = new Calculator(triangularMatrix);
 
         Assertions.assertThrows(RuntimeException.class, () ->
-                Calculator.calculateMaxSumPath(triangularMatrix));
+                calculator.calculateMaxSumPath());
     }
 
     private List<List<Cell>> createTriangularMatrix() {

@@ -1,46 +1,60 @@
 import java.util.List;
 
 class Calculator {
-    static Integer calculateMaxSumPath(List<List<Cell>> triangularMatrix) {
+    private final List<List<Cell>> triangularMatrix;
+
+    private final static Integer one = 1;
+
+    Calculator(List<List<Cell>> triangularMatrix) {
+        this.triangularMatrix = triangularMatrix;
+    }
+
+    Integer calculateMaxSumPath() {
         int lastRowIndex = triangularMatrix.size() - 1;
-        int max = Integer.MIN_VALUE;
+        int maxValue = Integer.MIN_VALUE;
+        int totalRows = triangularMatrix.size();
 
         try {
-            for (int i = 0; i < triangularMatrix.size(); i++) {
-                CalculateMaxSofarForEachChild(triangularMatrix, i);
+            for (int rowIndex = 0; rowIndex < totalRows; rowIndex++) {
+                calculateMaxSumSofarForARow(rowIndex);
             }
         } catch (Exception ex) {
             throw new RuntimeException(ex.getMessage());
         }
 
         for (Cell cell : triangularMatrix.get(lastRowIndex)) {
-            max = Math.max(max, cell.maxSumSoFar);
+            maxValue = Math.max(maxValue, cell.maxSumSoFar);
         }
 
-        return max;
+        return maxValue;
     }
 
-    private static void CalculateMaxSofarForEachChild(List<List<Cell>> triangularMatrix, int i) {
-        for (int j = 0; j < triangularMatrix.get(i).size(); j++) {
-            CalculateMaxSoFarForTwoChildNode(triangularMatrix, i, j);
+    private void calculateMaxSumSofarForARow(int rowIndex) {
+        for (int columnIndex = 0; columnIndex < triangularMatrix.get(rowIndex).size(); columnIndex++) {
+            calculateMaxSumSoFarForChildren(rowIndex, columnIndex);
         }
     }
 
-    private static void CalculateMaxSoFarForTwoChildNode(List<List<Cell>> triangularMatrix, int i, int j) {
-        if (i + 1 < triangularMatrix.size() && j + 1 <= triangularMatrix.get(i).size()) {
-            Integer ithAndJThCellMaxSoFar = triangularMatrix.get(i).get(j).maxSumSoFar;
+    private void calculateMaxSumSoFarForChildren(int rowIndex, int columnIndex) {
+        int totalRows = triangularMatrix.size();
+        int ithRowSize = triangularMatrix.get(rowIndex).size();
 
-            Integer ithPlus1AndJThCellMaxSum = triangularMatrix.get(i + 1).get(j).maxSumSoFar;
-            Integer ithPlus1AndJThCellValue = triangularMatrix.get(i + 1).get(j).value;
+        if (rowIndex + one < totalRows && columnIndex + one <= ithRowSize) {
+            int maxSoFarParentCell = triangularMatrix.get(rowIndex).get(columnIndex).maxSumSoFar;
 
-            ithPlus1AndJThCellMaxSum = Math.max(ithPlus1AndJThCellMaxSum, ithAndJThCellMaxSoFar + ithPlus1AndJThCellValue);
-            triangularMatrix.get(i + 1).get(j).maxSumSoFar = ithPlus1AndJThCellMaxSum;
+            int leftChildMaxSumSoFar = calculateCellMaxValue(rowIndex + one, columnIndex, maxSoFarParentCell);
+            triangularMatrix.get(rowIndex + one).get(columnIndex).maxSumSoFar = leftChildMaxSumSoFar;
 
-            Integer ithPlus1AndJThPlus1CellMaxSum = triangularMatrix.get(i + 1).get(j + 1).maxSumSoFar;
-            Integer ithPlus1AndJThPlus1CellValue = triangularMatrix.get(i + 1).get(j + 1).value;
-
-            ithPlus1AndJThPlus1CellMaxSum = Math.max(ithPlus1AndJThPlus1CellMaxSum, ithAndJThCellMaxSoFar + ithPlus1AndJThPlus1CellValue);
-            triangularMatrix.get(i + 1).get(j + 1).maxSumSoFar = ithPlus1AndJThPlus1CellMaxSum;
+            int rightChildMaxSumSoFar = calculateCellMaxValue(rowIndex + one, columnIndex + one, maxSoFarParentCell);
+            triangularMatrix.get(rowIndex + one).get(columnIndex + one).maxSumSoFar = rightChildMaxSumSoFar;
         }
+    }
+
+    private Integer calculateCellMaxValue(int rowIndex, int columnIndex, int maxSoFarParentCell) {
+        int maxSoFarChildCell = triangularMatrix.get(rowIndex).get(columnIndex).maxSumSoFar;
+        int childCellValue = triangularMatrix.get(rowIndex).get(columnIndex).value;
+
+        maxSoFarChildCell = Math.max(maxSoFarChildCell, maxSoFarParentCell + childCellValue);
+        return maxSoFarChildCell;
     }
 }
