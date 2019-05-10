@@ -9,7 +9,8 @@ class ReaderTest {
     @Test
     @DisplayName("Expects to read static text file with a triangle pof size 100")
     void expectsToReadTextFile() throws IOException {
-        String filePath = "/Users/pulkit.gupta/Desktop/euler/src/main/resources/p067_triangle.txt";
+        String projectPath = System.getProperty("user.dir");
+        String filePath = projectPath + "/src/main/resources/p067_triangle.txt";
 
         List<List<Cell>> triangularMatrix = Reader.readTextFile(filePath);
 

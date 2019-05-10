@@ -16,7 +16,7 @@ class Calculator {
 
         try {
             for (int rowIndex = 0; rowIndex < totalRows; rowIndex++) {
-                calculateMaxSumSofarForARow(rowIndex);
+                calculateMaxSumSoFarForARow(rowIndex);
             }
         } catch (Exception ex) {
             throw new RuntimeException(ex.getMessage());
@@ -29,7 +29,7 @@ class Calculator {
         return maxValue;
     }
 
-    private void calculateMaxSumSofarForARow(int rowIndex) {
+    private void calculateMaxSumSoFarForARow(int rowIndex) {
         for (int columnIndex = 0; columnIndex < triangularMatrix.get(rowIndex).size(); columnIndex++) {
             calculateMaxSumSoFarForChildren(rowIndex, columnIndex);
         }
