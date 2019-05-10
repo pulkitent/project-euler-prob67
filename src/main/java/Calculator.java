@@ -2,7 +2,6 @@ import java.util.List;
 
 class Calculator {
     private final List<List<Cell>> triangularMatrix;
-
     private final static Integer one = 1;
 
     Calculator(List<List<Cell>> triangularMatrix) {
@@ -10,9 +9,9 @@ class Calculator {
     }
 
     Integer calculateMaxSumPath() {
-        int lastRowIndex = triangularMatrix.size() - 1;
         int maxValue = Integer.MIN_VALUE;
         int totalRows = triangularMatrix.size();
+        int lastRowIndex = triangularMatrix.size() - 1;
 
         try {
             for (int rowIndex = 0; rowIndex < totalRows; rowIndex++) {
@@ -22,7 +21,9 @@ class Calculator {
             throw new RuntimeException(ex.getMessage());
         }
 
-        for (Cell cell : triangularMatrix.get(lastRowIndex)) {
+        List<Cell> lastRow = triangularMatrix.get(lastRowIndex);
+
+        for (Cell cell : lastRow) {
             maxValue = Math.max(maxValue, cell.maxSumSoFar);
         }
 
@@ -51,8 +52,8 @@ class Calculator {
     }
 
     private Integer calculateCellMaxValue(int rowIndex, int columnIndex, int maxSoFarParentCell) {
-        int maxSoFarChildCell = triangularMatrix.get(rowIndex).get(columnIndex).maxSumSoFar;
         int childCellValue = triangularMatrix.get(rowIndex).get(columnIndex).value;
+        int maxSoFarChildCell = triangularMatrix.get(rowIndex).get(columnIndex).maxSumSoFar;
 
         maxSoFarChildCell = Math.max(maxSoFarChildCell, maxSoFarParentCell + childCellValue);
         return maxSoFarChildCell;

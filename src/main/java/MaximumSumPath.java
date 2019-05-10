@@ -9,12 +9,12 @@ public class MaximumSumPath {
         String filePath = projectPath + "/src/main/resources/p067_triangle.txt";
 
         List<List<Cell>> triangularMatrix = Reader.readTextFile(filePath);
-        triangularMatrix.forEach(System.out::println);
+        //triangularMatrix.forEach(System.out::println);
 
         Calculator calculator = new Calculator(triangularMatrix);
         int maxPathSum = calculator.calculateMaxSumPath();
         System.out.println("Maximum path sum " + maxPathSum);
-        triangularMatrix.forEach(System.out::println);
+        //triangularMatrix.forEach(System.out::println);
 
         long endTime = System.nanoTime();
         long totalTime = endTime - startTime;
