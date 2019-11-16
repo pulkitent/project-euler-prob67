@@ -1,4 +1,4 @@
-This is my personal experiment where I will prove taht even in Optimization probelms of data structures and algorithms, we can write clean code with high readablility by following best coding pratices mentioned object calesthenics here - https://williamdurand.fr/2013/06/03/object-calisthenics/
+This is my personal experiment where I will prove that even in Optimization probelms of data structures and algorithms, we can write clean code with high readablility by following best coding pratices mentioned object calesthenics here - https://williamdurand.fr/2013/06/03/object-calisthenics/
 
 # project euler prob 67
 Maximum path sum II (Problem 67)
